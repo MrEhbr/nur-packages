@@ -2,4 +2,6 @@
 
 {
   nixosModules = import ./nixos-modules;
+
+  yokoku = pkgs.callPackage ./pkgs/yokoku { };
 }
