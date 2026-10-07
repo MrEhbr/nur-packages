@@ -11,18 +11,18 @@
 let
   inherit (stdenvNoCC.hostPlatform) system;
   shaMap = {
-    x86_64-linux = "0lvbflb3c5pb3paa5hq7k768hv87l9a27fp5wr7fpacarfc0z09v";
-    aarch64-linux = "0vfg5liwcjjkp9xhjpxrgl6qwl4zdyf0k7rw774jryzkpbxbqyzz";
+    x86_64-linux = "17zjw365abjgpzfmgi6q3nxbvb4l02k1rmxaikb2qp6cvv9dclgp";
+    aarch64-linux = "16l745s28cxxhxhjl4siv7bkayvcg0lbh3bfg6yzxhl2lj18q9s9";
   };
 
   urlMap = {
-    x86_64-linux = "https://github.com/MrEhbr/yokoku/releases/download/v0.7.0/yokoku_Linux_x86_64.tar.gz";
-    aarch64-linux = "https://github.com/MrEhbr/yokoku/releases/download/v0.7.0/yokoku_Linux_arm64.tar.gz";
+    x86_64-linux = "https://github.com/MrEhbr/yokoku/releases/download/v0.8.0/yokoku_Linux_x86_64.tar.gz";
+    aarch64-linux = "https://github.com/MrEhbr/yokoku/releases/download/v0.8.0/yokoku_Linux_arm64.tar.gz";
   };
 in
 stdenvNoCC.mkDerivation {
   pname = "yokoku";
-  version = "0.7.0";
+  version = "0.8.0";
   src = fetchurl {
     url = urlMap.${system};
     sha256 = shaMap.${system};
@@ -37,6 +37,10 @@ stdenvNoCC.mkDerivation {
     mkdir -p $out/bin $out/share/yokoku
     cp -v ./yokoku $out/bin/yokoku
     cp -vr ./public $out/share/yokoku/public
+    installShellCompletion --cmd yokoku \
+    --bash <(./yokoku completions bash) \
+    --fish <(./yokoku completions fish) \
+    --zsh <(./yokoku completions zsh)
     wrapProgram $out/bin/yokoku \
     --prefix PATH : ${lib.makeBinPath [ ffmpeg-headless ]} \
     --set-default DIOXUS_PUBLIC_PATH $out/share/yokoku/public
