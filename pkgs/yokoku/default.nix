@@ -11,18 +11,18 @@
 let
   inherit (stdenvNoCC.hostPlatform) system;
   shaMap = {
-    x86_64-linux = "17zjw365abjgpzfmgi6q3nxbvb4l02k1rmxaikb2qp6cvv9dclgp";
-    aarch64-linux = "16l745s28cxxhxhjl4siv7bkayvcg0lbh3bfg6yzxhl2lj18q9s9";
+    x86_64-linux = "11z9jjz6fa8kyvfsxyq9q22adbwhik0s5dh7n9c2ias08jnib3i3";
+    aarch64-linux = "1ak3bsyh8xb9nkn2rmndzkk4k9g48k12la9g10h0mya48049gsyd";
   };
 
   urlMap = {
-    x86_64-linux = "https://github.com/MrEhbr/yokoku/releases/download/v0.8.0/yokoku_Linux_x86_64.tar.gz";
-    aarch64-linux = "https://github.com/MrEhbr/yokoku/releases/download/v0.8.0/yokoku_Linux_arm64.tar.gz";
+    x86_64-linux = "https://github.com/MrEhbr/yokoku/releases/download/v0.9.0/yokoku_Linux_x86_64.tar.gz";
+    aarch64-linux = "https://github.com/MrEhbr/yokoku/releases/download/v0.9.0/yokoku_Linux_arm64.tar.gz";
   };
 in
 stdenvNoCC.mkDerivation {
   pname = "yokoku";
-  version = "0.8.0";
+  version = "0.9.0";
   src = fetchurl {
     url = urlMap.${system};
     sha256 = shaMap.${system};
