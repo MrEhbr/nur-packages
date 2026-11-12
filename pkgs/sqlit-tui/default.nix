@@ -6,14 +6,14 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "sqlit-tui";
-  version = "1.4.0";
+  version = "1.6.5";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "Maxteabag";
     repo = "sqlit";
     tag = "v${version}";
-    hash = "sha256-lcZe7EiN/wZllRO7KnXryoeGiUVBhSE4AYaRniZV6Cw=";
+    hash = "sha256-pHKK4JKVSZWZ93k99MqKSZk5PZiPm6KfvopbrY5yfWI=";
   };
 
   build-system = with python3Packages; [
@@ -40,10 +40,12 @@ python3Packages.buildPythonApplication rec {
 
   pythonRelaxDeps = [
     "paramiko"
+    "textual-fastdatatable"
   ];
 
   nativeCheckInputs = with python3Packages; [
     pytest-asyncio
+    pytz
     pytestCheckHook
   ];
 
